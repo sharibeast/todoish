@@ -1,5 +1,5 @@
 {
-  "name": "redux-pro",
+  "name": "@client/task-management",
   "private": true,
   "version": "0.0.0",
   "type": "module",

@@ -1,5 +1,10 @@
-import { FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Task from './components/Task';
+import { useSelector, useDispatch } from 'react-redux';
+import { decrement, increment, incrementByAmount } from './counterSlice';
+import { Rootstate } from './store';
+import { useAppDispatch, useAppSelector } from './Hooks/hooks';
+import { addTodo } from './Slices/todoSlice';
 
 const data = [
   {
@@ -11,36 +16,40 @@ const data = [
 
 
 function App() {
-  const [tasks, setTasks] = useState(data)
+  const count = useSelector((state: Rootstate) => state.counter)
+  const todos = useSelector((state: Rootstate) => state.tasks)
+  const newCount = useAppSelector(state => state.counter.value)
+  const newDispatch = useAppDispatch()
+  const dispatch = useDispatch()
+
   const [todo, setTodo] = useState('');
   const [showForm, setShowForm] = useState<boolean>(false)
 
-  function handleSubmit(e: FormEvent) {
+
+
+
+  function submit(e: FormEvent) {
     e.preventDefault()
+    // dont submit if input form is empty
     if (todo.length < 1) {
-      return
+      return;
     }
-
-    console.log('fired')
-    const newTasks = [...tasks, { id: tasks.length + 1, todo: todo, completed: false }]
-    setTasks(newTasks)
-    setTodo('')
-    setShowForm(!showForm)
-
+    dispatch(addTodo(todo))
   }
 
-  function handleClick(id: number) {
-    console.log(`clicked ${id}`)
-    const newTasks = tasks.map((todo) => todo.id === id ? { ...todo, completed: !todo.completed } : { ...todo })
-    setTasks(newTasks)
-  }
+  // function handleClick(id: number) {
+  //   console.log(`clicked ${id}`)
+  //   const newTasks = tasks.map((todo) => todo.id === id ? { ...todo, completed: !todo.completed } : { ...todo })
+  //   setTasks(newTasks)
+  // }
 
-  function handleDelete(id: number) {
-    const newTasks = tasks.filter(todo => todo.id !== id)
-    setTasks(newTasks)
+  // function handleDelete(id: number) {
+  //   const newTasks = tasks.filter(todo => todo.id !== id)
+  //   setTasks(newTasks)
 
-  }
+  // }
   return (
+
     <div className="bg-[#18181A] text-white h-screen" >
       <div className='max-w-5xl mx-auto'>
         <header className='flex py-4 border-b border-[#252527]'>
@@ -50,15 +59,16 @@ function App() {
           <div>
             <h2 className="text-[#C37947] font-medium text-lg"> <span>icon</span> Current</h2>
             <ul className='flex flex-col gap-2'>
+
               {
-                tasks.map((task) => <Task key={task.id}>{task.todo}</Task>)
+                todos.map((task) => <Task key={task.todo}>{task.todo}</Task>)
               }
 
             </ul>
             {
               showForm && (
 
-                <form action="#" className='mt-2' onSubmit={handleSubmit}>
+                <form action="#" className='mt-2' onSubmit={submit}>
                   <input
                     placeholder='Task name'
                     className='mt-1 px-3 py-2 bg-[#1e1d1f]    focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1'
@@ -94,6 +104,7 @@ function App() {
 
       </div>
 
+
       {/* <div>
         {tasks.map((todo) => (
           <div key={todo.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0" }}>
@@ -105,9 +116,8 @@ function App() {
         {tasks.length === 0 && 'Hurray! you have no task today'}
 
       </div> */}
-
-
     </div>
+
   );
 }
 
