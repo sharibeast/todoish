@@ -1,24 +1,15 @@
-import React, { FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import Task from './components/Task';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, incrementByAmount } from './counterSlice';
 import { Rootstate } from './store';
 import { useAppDispatch, useAppSelector } from './Hooks/hooks';
-import { addTodo } from './Slices/todoSlice';
+import { addTodo, deleteTodo, updateTodo } from './Slices/todoSlice';
 
-const data = [
-  {
-    id: 1,
-    todo: 'first task',
-    completed: false,
-  },
-];
 
 
 function App() {
-  const count = useSelector((state: Rootstate) => state.counter)
   const todos = useSelector((state: Rootstate) => state.tasks)
-  const newCount = useAppSelector(state => state.counter.value)
   const newDispatch = useAppDispatch()
   const dispatch = useDispatch()
 
@@ -26,44 +17,60 @@ function App() {
   const [showForm, setShowForm] = useState<boolean>(false)
 
 
-
-
   function submit(e: FormEvent) {
     e.preventDefault()
-    // dont submit if input form is empty
     if (todo.length < 1) {
       return;
     }
     dispatch(addTodo(todo))
   }
 
-  // function handleClick(id: number) {
-  //   console.log(`clicked ${id}`)
-  //   const newTasks = tasks.map((todo) => todo.id === id ? { ...todo, completed: !todo.completed } : { ...todo })
-  //   setTasks(newTasks)
-  // }
+  function handleCheck(index: number) {
 
-  // function handleDelete(id: number) {
-  //   const newTasks = tasks.filter(todo => todo.id !== id)
-  //   setTasks(newTasks)
+    console.log('dispatching.....')
+    console.log(index)
+    dispatch(updateTodo(index))
+    console.log('dispatching end...')
+  }
 
-  // }
+  function handleDelete(index:number) {
+dispatch(deleteTodo(index))
+  }
+
+  // useEffect(() => {
+
+  //   console.log('run');
+
+  // }, [])
+
+
+
+
   return (
 
     <div className="bg-[#18181A] text-white h-screen" >
       <div className='max-w-5xl mx-auto'>
         <header className='flex py-4 border-b border-[#252527]'>
-          <h2 className='font-semibold text-2xl'>Tasks</h2>
+          <h2 className='font-semibold text-2xl'>Today</h2>
         </header>
-        <div className='grid grid-cols-3 mt-4 gap-8'>
-          <div>
-            <h2 className="text-[#C37947] font-medium text-lg"> <span>icon</span> Current</h2>
+
+        <div className='mt-4 gap-8'>
+          {
+            todos.length === 0 && (
+              <div>You dont have Tasks today.</div>
+            )
+          }
+          <div className=''>
             <ul className='flex flex-col gap-2'>
-
               {
-                todos.map((task) => <Task key={task.todo}>{task.todo}</Task>)
+                todos.map((todo, index) => <Task
+                  key={index}
+                  value={todo.completed}
+                  onChange={() => handleCheck(index)
+                  }
+                  onDelete={()=>handleDelete(index)}
+                  >{todo.todo}</Task>)
               }
-
             </ul>
             {
               showForm && (
@@ -93,13 +100,12 @@ function App() {
               )
             }
 
+            {
+              JSON.stringify(todos)
+            }
+
           </div>
-          <div>
-            <h2 className="text-[#2b67d8] font-medium text-lg">Backlog</h2>
-          </div>
-          <div>
-            <h2 className="text-[#6E6D73] font-medium text-lg">Backlog</h2>
-          </div>
+
         </div>
 
       </div>
