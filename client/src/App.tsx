@@ -26,25 +26,12 @@ function App() {
   }
 
   function handleCheck(index: number) {
-
-    console.log('dispatching.....')
-    console.log(index)
     dispatch(updateTodo(index))
-    console.log('dispatching end...')
   }
 
   function handleDelete(index:number) {
 dispatch(deleteTodo(index))
   }
-
-  // useEffect(() => {
-
-  //   console.log('run');
-
-  // }, [])
-
-
-
 
   return (
 
@@ -74,7 +61,6 @@ dispatch(deleteTodo(index))
             </ul>
             {
               showForm && (
-
                 <form action="#" className='mt-2' onSubmit={submit}>
                   <input
                     placeholder='Task name'
@@ -83,7 +69,7 @@ dispatch(deleteTodo(index))
                     name="todo"
                     id="todo"
                     value={todo}
-                    onChange={(e) => setTodo(e.target.value)}
+                    onChange={(e:ChangeEvent<HTMLInputElement>) => setTodo(e.target.value)}
                   />
                 </form>
               )
