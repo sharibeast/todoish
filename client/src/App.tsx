@@ -5,6 +5,7 @@ import { decrement, increment, incrementByAmount } from './counterSlice';
 import { Rootstate } from './store';
 import { useAppDispatch, useAppSelector } from './Hooks/hooks';
 import { addTodo, deleteTodo, updateTodo } from './Slices/todoSlice';
+import Checkbox from './components/Checkbox';
 
 
 
@@ -23,19 +24,19 @@ function App() {
       return;
     }
     dispatch(addTodo(todo))
+    setTodo('')
   }
 
   function handleCheck(index: number) {
     dispatch(updateTodo(index))
   }
 
-  function handleDelete(index:number) {
-dispatch(deleteTodo(index))
+  function handleDelete(index: number) {
+    dispatch(deleteTodo(index))
   }
 
   return (
-
-    <div className="bg-[#18181A] text-white h-screen" >
+    <div className="bg-[#1F1F1F] text-white h-screen" >
       <div className='max-w-5xl mx-auto'>
         <header className='flex py-4 border-b border-[#252527]'>
           <h2 className='font-semibold text-2xl'>Today</h2>
@@ -55,8 +56,8 @@ dispatch(deleteTodo(index))
                   value={todo.completed}
                   onChange={() => handleCheck(index)
                   }
-                  onDelete={()=>handleDelete(index)}
-                  >{todo.todo}</Task>)
+                  onDelete={() => handleDelete(index)}
+                >{todo.todo}</Task>)
               }
             </ul>
             {
@@ -69,7 +70,7 @@ dispatch(deleteTodo(index))
                     name="todo"
                     id="todo"
                     value={todo}
-                    onChange={(e:ChangeEvent<HTMLInputElement>) => setTodo(e.target.value)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setTodo(e.target.value)}
                   />
                 </form>
               )
@@ -89,25 +90,11 @@ dispatch(deleteTodo(index))
             {
               JSON.stringify(todos)
             }
-
           </div>
 
         </div>
 
       </div>
-
-
-      {/* <div>
-        {tasks.map((todo) => (
-          <div key={todo.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 0" }}>
-            <li style={{ textDecoration: todo.completed ? "line-through" : "none" }} onClick={() => handleClick(todo.id)}>{todo.todo}</li>
-            <button onClick={() => handleDelete(todo.id)}>delete</button>
-          </div>
-
-        ))}
-        {tasks.length === 0 && 'Hurray! you have no task today'}
-
-      </div> */}
     </div>
 
   );
