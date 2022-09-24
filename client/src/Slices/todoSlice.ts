@@ -11,7 +11,7 @@ const initial = {
   count: 0,
   todos: [],
 };
-const initialTodoState: TodoState[] = [{ completed: false, todo: 'hell' }];
+const initialTodoState: TodoState[] = [];
 
 export const todoSlice = createSlice({
   name: 'todo',

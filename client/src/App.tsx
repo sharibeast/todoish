@@ -10,7 +10,7 @@ import Checkbox from './components/Checkbox';
 
 
 function App() {
-  const todos = useSelector((state: Rootstate) => state.tasks)
+  const todos = useSelector((state: Rootstate) => state.tasks.filter((todo) => todo.completed === false))
   const newDispatch = useAppDispatch()
   const dispatch = useDispatch()
 
@@ -87,9 +87,9 @@ function App() {
               )
             }
 
-            {
+            {/* {
               JSON.stringify(todos)
-            }
+            } */}
           </div>
 
         </div>
