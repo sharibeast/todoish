@@ -2,11 +2,18 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 
-export default function Checkbox({onChange}) {
+export default function Checkbox({ onclick }) {
           const [showIcon, setShowIcon] = useState<boolean>(false)
-          
+
           return (
-                    <button onClick={onChange} onMouseOut={() => setShowIcon(false)} onMouseOver={() => { setShowIcon(true) }} type={'button'} role={'checkbox'} className='h-5 w-5 rounded-full border border-gray-500 flex items-center justify-center'>
+                    <button
+                              onClick={onclick}
+                              onMouseOut={() => setShowIcon(false)}
+                              onMouseOver={() => { setShowIcon(true) }}
+                              type={'button'}
+                              role={'checkbox'}
+                              className='h-5 w-5 rounded-full border border-gray-500 flex items-center justify-center'
+                    >
                               {
                                         showIcon && (
                                                   <div className=''>

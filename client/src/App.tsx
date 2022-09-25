@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useEffect,useId } from 'react';
 import Task from './components/Task';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, incrementByAmount } from './counterSlice';
@@ -13,6 +13,7 @@ function App() {
   const todos = useSelector((state: Rootstate) => state.tasks.filter((todo) => todo.completed === false))
   const newDispatch = useAppDispatch()
   const dispatch = useDispatch()
+  const id = useId()
 
   const [todo, setTodo] = useState('');
   const [showForm, setShowForm] = useState<boolean>(false)
@@ -87,9 +88,9 @@ function App() {
               )
             }
 
-            {/* {
+            {
               JSON.stringify(todos)
-            } */}
+            }
           </div>
 
         </div>

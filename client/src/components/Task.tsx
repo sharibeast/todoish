@@ -39,7 +39,7 @@ export default function Task({ children, value, onChange, onDelete }: TaskProps)
                               onMouseOver={show} onMouseOut={hide} className='flex items-center gap-x-2 py-4 px-2 rounded-sm   cursor-pointer  transition-all duration-150 border-b border-[#333333]'
                     >
                               <>
-                                        <Checkbox onChange={onChange} />
+                                        <Checkbox onclick={onChange} />
                                         {/* <input type="checkbox" className='h-4 w-4 cursor-pointer' checked={value} onChange={onChange} /> */}
                                         {children}
                                         {
