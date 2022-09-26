@@ -46,7 +46,7 @@ function App() {
         <div className='mt-4 gap-8'>
           {
             todos.length === 0 && (
-              <div>You dont have Tasks today.</div>
+              <div className='text-center text-xl text-gray-400 font-semibold'>You dont have Tasks today.</div>
             )
           }
           <div className=''>
@@ -88,9 +88,9 @@ function App() {
               )
             }
 
-            {
+            {/* {
               JSON.stringify(todos)
-            }
+            } */}
           </div>
 
         </div>

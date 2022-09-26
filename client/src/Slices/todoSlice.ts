@@ -43,13 +43,6 @@ export const todoSlice = createSlice({
           return todo;
         }
         return { ...todo, completed: !todo.completed };
-        //   if (index !== action.payload) return todo;
-        //   console.log(action.payload);
-        //   return {
-        //     ...todo,
-        //     completed: !todo.completed,
-        //   };
-        // }
       });
       console.log(current(state));
     },
