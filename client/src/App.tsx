@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState, useEffect,useId } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useEffect, useId } from 'react';
 import Task from './components/Task';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, incrementByAmount } from './counterSlice';
@@ -13,7 +13,7 @@ function App() {
   const todos = useSelector((state: Rootstate) => state.tasks.filter((todo) => todo.completed === false))
   const newDispatch = useAppDispatch()
   const dispatch = useDispatch()
-  const id = useId()
+
 
   const [todo, setTodo] = useState('');
   const [showForm, setShowForm] = useState<boolean>(false)
@@ -28,12 +28,12 @@ function App() {
     setTodo('')
   }
 
-  function handleCheck(index: number) {
-    dispatch(updateTodo(index))
+  function handleCheck(id: number) {
+    dispatch(updateTodo(id))
   }
 
-  function handleDelete(index: number) {
-    dispatch(deleteTodo(index))
+  function handleDelete(id: number) {
+    dispatch(deleteTodo(id))
   }
 
   return (
@@ -52,12 +52,12 @@ function App() {
           <div className=''>
             <ul className='flex flex-col gap-2'>
               {
-                todos.map((todo, index) => <Task
-                  key={index}
+                todos.map((todo) => <Task
+                  key={todo.id}
                   value={todo.completed}
-                  onChange={() => handleCheck(index)
+                  onChange={() => handleCheck(todo.id)
                   }
-                  onDelete={() => handleDelete(index)}
+                  onDelete={() => handleDelete(todo.id)}
                 >{todo.todo}</Task>)
               }
             </ul>
