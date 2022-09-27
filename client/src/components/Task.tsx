@@ -36,12 +36,14 @@ export default function Task({ children, value, onChange, onDelete }: TaskProps)
           // }
           return (
                     <li
-                              onMouseOver={show} onMouseOut={hide} className='flex items-center gap-x-2 py-4 px-2 rounded-sm   cursor-pointer  transition-all duration-150 border-b border-[#333333]'
+                              onMouseOver={show} onMouseOut={hide} className=' text-gray-300'
                     >
-                              <>
+                              <div className='flex border-b border-[#333333] items-start '>
                                         <Checkbox onclick={onChange} />
                                         {/* <input type="checkbox" className='h-4 w-4 cursor-pointer' checked={value} onChange={onChange} /> */}
-                                        {children}
+                                        <div className='ml-3 py-2 '>
+                                                  {children}
+                                        </div>
                                         {
                                                   showDelete && (
                                                             <>
@@ -54,7 +56,7 @@ export default function Task({ children, value, onChange, onDelete }: TaskProps)
                                                                       <button onMouseOver={show} className='ml-auto' onClick={onDelete}>
                                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                                           width="24" height="24"
-                                                                                          className='text-gray-500'
+                                                                                          className='text-gray-500 '
                                                                                           viewBox="0 0 24 24"
                                                                                           fill="none"
                                                                                           stroke="currentColor"
@@ -70,7 +72,7 @@ export default function Task({ children, value, onChange, onDelete }: TaskProps)
                                                             </>
                                                   )
                                         }
-                              </>
+                              </div>
                     </li>
           )
 }
