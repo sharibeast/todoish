@@ -10,7 +10,7 @@ import SideBar from './components/SideBar';
 import Header from './components/Header';
 import Notasks from './components/Notasks';
 import { addTaskForm, editForm } from './formSlice';
-import AddTaskForm from './components/Form/addTaskForm';
+import AddTaskForm from './components/Form/AddTaskForm';
 
 
 
