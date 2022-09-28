@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
+import { Rootstate } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
+import { addTaskForm, editForm } from '../formSlice'
 import Checkbox from './Checkbox'
 interface TaskProps {
-          children: string,
-          value?: boolean,
+          todo: string,
+          checked?: boolean,
           onChange?: () => void,
-          onDelete?: () => void
+          onDelete?: () => void,
+          onUpdate?: () => void
 }
 
 
 
-export default function Task({ children, value, onChange, onDelete }: TaskProps) {
+export default function Task({ todo, checked, onChange, onDelete, onUpdate }: TaskProps) {
           const [showDelete, setShowDelete] = useState<boolean>(false)
-          const [isEditing, setIsEditing] = useState<boolean>(false)
+          const isEditing = useSelector((state: Rootstate) => state.otherStates.showEditingForm)
+          const dispatch = useDispatch()
 
           function show() {
                     setShowDelete(true)
@@ -21,15 +25,12 @@ export default function Task({ children, value, onChange, onDelete }: TaskProps)
                     setShowDelete(false)
           }
           function handleEdit() {
-                    setIsEditing(true)
-                    console.log(isEditing)
+                    // dispatch(addTaskForm(false))
+                    dispatch(editForm(true))
           }
           if (isEditing) {
                     return (
-
                               <>
-
-
                                         <form action="#" className='mt-2' >
                                                   <input
                                                             placeholder='Task name'
@@ -37,12 +38,13 @@ export default function Task({ children, value, onChange, onDelete }: TaskProps)
                                                             type="text"
                                                             name="todo"
                                                             id="todo"
-                                                            value={children}
+                                                            value={todo}
+                                                            onChange={onUpdate}
                                                   //      onChange={(e: ChangeEvent<HTMLInputElement>) => setTodo(e.target.value)}
                                                   />
                                                   <div className='flex justify-start mt-2 gap-2 flex-row-reverse'>
                                                             <button className='py-1 px-4 bg-[#a82e21] hover:bg-[#C53727] rounded-md text-gray-300'>Update Task</button>
-                                                            <button  className='py-1 px-4 bg-[#313131] hover:bg-[#3D3D3D] rounded-md text-gray-300'>Cancel</button>
+                                                            <button className='py-1 px-4 bg-[#313131] hover:bg-[#3D3D3D] rounded-md text-gray-300'>Cancel</button>
                                                   </div>
                                         </form>
                               </>
@@ -56,17 +58,17 @@ export default function Task({ children, value, onChange, onDelete }: TaskProps)
                                         <Checkbox onclick={onChange} />
                                         {/* <input type="checkbox" className='h-4 w-4 cursor-pointer' checked={value} onChange={onChange} /> */}
                                         <div className='ml-3 py-2 mr-3'>
-                                                  {children}
+                                                  {todo}
                                         </div>
                                         {
                                                   showDelete && (
-                                                            <div className='absolute right-1 top-2 bg-black'>
-                                                                      <button onClick={handleEdit}>
+                                                            <div className='absolute right-1 top-2 '>
+                                                                      {/* <button onClick={handleEdit}>
                                                                                 <svg width="24" height="24" fill="none" stroke='currentColor' className='text-gray-500' viewBox="0 0 24 24">
-                                                                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 19.25L9 18.25L18.2929 8.95711C18.6834 8.56658 18.6834 7.93342 18.2929 7.54289L16.4571 5.70711C16.0666 5.31658 15.4334 5.31658 15.0429 5.70711L5.75 15L4.75 19.25Z"></path>
-                                                                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 19.25H13.75"></path>
+                                                                                          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4.75 19.25L9 18.25L18.2929 8.95711C18.6834 8.56658 18.6834 7.93342 18.2929 7.54289L16.4571 5.70711C16.0666 5.31658 15.4334 5.31658 15.0429 5.70711L5.75 15L4.75 19.25Z"></path>
+                                                                                          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19.25 19.25H13.75"></path>
                                                                                 </svg>
-                                                                      </button>
+                                                                      </button> */}
                                                                       <button onMouseOver={show} className='ml-auto z-10' onClick={onDelete}>
                                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                                           width="24" height="24"

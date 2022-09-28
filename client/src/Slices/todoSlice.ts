@@ -44,7 +44,6 @@ export const todoSlice = createSlice({
         }
         return { ...todo, completed: !todo.completed };
       });
-      console.log(current(state));
     },
     deleteTodo: (state, action: PayloadAction<number>) => {
       return state.filter((todo) => todo.id !== action.payload);
