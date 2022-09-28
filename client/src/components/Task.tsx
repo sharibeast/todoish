@@ -41,7 +41,7 @@ export default function Task({ children, value, onChange, onDelete }: TaskProps)
                               <div className='flex border-b border-[#333333] items-start '>
                                         <Checkbox onclick={onChange} />
                                         {/* <input type="checkbox" className='h-4 w-4 cursor-pointer' checked={value} onChange={onChange} /> */}
-                                        <div className='ml-3 py-2 '>
+                                        <div className='ml-3 py-2'>
                                                   {children}
                                         </div>
                                         {

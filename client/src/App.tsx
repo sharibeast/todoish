@@ -49,7 +49,7 @@ function App() {
             </li>
             <li>
               <div className=' px-4 py-1 rounded-sm hover:bg-[#363636] transition-all duration-100 '>
-                
+
                 Completed
               </div>
             </li>
@@ -67,7 +67,7 @@ function App() {
                 )
               }
               <div className=''>
-                <ul className='flex flex-col gap-2'>
+                <ul className=''>
                   {
                     todos.map((todo) => <Task
                       key={todo.id}
@@ -83,13 +83,17 @@ function App() {
                     <form action="#" className='mt-2' onSubmit={submit}>
                       <input
                         placeholder='Task name'
-                        className='mt-1 px-3 py-2 bg-[#1e1d1f]    focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1'
+                        className='mt-1 px-3 py-2 bg-[#1e1d1f]    focus:outline-none focus:border-gray-600 focus:ring-gray-600 block w-full rounded-md sm:text-sm focus:ring-1'
                         type="text"
                         name="todo"
                         id="todo"
                         value={todo}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setTodo(e.target.value)}
                       />
+                      <div className='flex justify-end mt-2 gap-2'>
+                        <button onClick={() => { setShowForm(false) }} className='py-1 px-4 bg-[#313131] hover:bg-[#3D3D3D] rounded-md text-gray-300'>Cancel</button>
+                        <button type={'submit'} className='py-1 px-4 bg-[#a82e21] hover:bg-[#C53727] rounded-md text-gray-300'>Add Task</button>
+                      </div>
                     </form>
                   )
                 }
