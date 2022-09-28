@@ -90,9 +90,9 @@ function App() {
                         value={todo}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setTodo(e.target.value)}
                       />
-                      <div className='flex justify-end mt-2 gap-2'>
+                      <div className='flex justify-start mt-2 gap-2 flex-row-reverse'>
+                        <button className='py-1 px-4 bg-[#a82e21] hover:bg-[#C53727] rounded-md text-gray-300'>Add Task</button>
                         <button onClick={() => { setShowForm(false) }} className='py-1 px-4 bg-[#313131] hover:bg-[#3D3D3D] rounded-md text-gray-300'>Cancel</button>
-                        <button type={'submit'} className='py-1 px-4 bg-[#a82e21] hover:bg-[#C53727] rounded-md text-gray-300'>Add Task</button>
                       </div>
                     </form>
                   )
