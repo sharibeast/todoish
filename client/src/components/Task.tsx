@@ -55,7 +55,7 @@ export default function Task({ todo, checked, onChange, onDelete, onUpdate }: Ta
                               onMouseOver={show} onMouseOut={hide} className=' text-gray-300'
                     >
                               <div className='flex border-b border-[#333333] items-start relative '>
-                                        <Checkbox onclick={onChange} />
+                                        <Checkbox value={checked!} onclick={onChange} />
                                         {/* <input type="checkbox" className='h-4 w-4 cursor-pointer' checked={value} onChange={onChange} /> */}
                                         <div className='ml-3 py-2 mr-3'>
                                                   {todo}
