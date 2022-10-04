@@ -3,7 +3,7 @@ import React from 'react'
 import Header from '../components/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { Rootstate } from '../store'
-import {  deleteTodo, updateTodo } from '../Slices/todoSlice'
+import { deleteTodo, updateTodo } from '../Slices/todoSlice'
 import Task from '../components/Task'
 
 export default function Completed() {
@@ -20,8 +20,12 @@ export default function Completed() {
 
           return (
 
-                    <div className=''>
-                              <Header />
+                    <div className='mt-16'>
+
+
+                              <header className='flex py-4 border-b border-[#252527]'>
+                                        <h2 className='font-light text-gray-400 text-xl'>Completed Tasks</h2>
+                              </header>
                               <div className='mt-4 gap-8'>
                                         <div className=''>
                                                   <ul className=''>

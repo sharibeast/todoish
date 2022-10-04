@@ -1,7 +1,7 @@
-import React,{FormEvent, useState} from 'react'
+import React, { FormEvent, useState, useEffect } from 'react'
 import Header from '../components/Header'
 import Notasks from '../components/Notasks'
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useAppDispatch } from '../Hooks/hooks'
 import { Rootstate } from '../store'
 import { addTodo, deleteTodo, updateTodo } from '../Slices/todoSlice'
@@ -16,6 +16,14 @@ export default function Today() {
           const newDispatch = useAppDispatch()
           const dispatch = useDispatch()
           const [todo, setTodo] = useState('');
+
+
+          useEffect(() => {
+                    return () => {
+                              dispatch(addTaskForm(false))
+                    }
+          }, [])
+
 
           function submit(e: FormEvent) {
                     e.preventDefault()
@@ -41,7 +49,7 @@ export default function Today() {
           }
           return (
 
-                    <div className=''>
+                    <div className=' mt-16'>
                               <Header />
                               <div className='mt-4 gap-8'>
                                         {

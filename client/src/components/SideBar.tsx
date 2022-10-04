@@ -1,14 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 export default function SideBar() {
-          return (
+          const location = useLocation()
+          const { pathname } = location
+          const path = pathname.split("/")
 
+          return (
                     <div className=' w-80 bg-[#242424]'>
-                              <ul className='pl-9'>
-                                        <Link to={"/today"}>
+
+                              <ul className='pl-9 pt-16'>
+                                        <Link to={"/today"}   >
                                                   <li className='cursor-pointer'>
-                                                            <div className='px-4  py-1 flex rounded-sm hover:bg-[#363636] transition-all duration-100 '>
+                                                            <div className={`px-4  py-1 flex rounded-sm hover:bg-[#363636] ${path[1] === 'today' ? "bg-[#363636]" : ""} transition-all duration-100 `}>
                                                                       <svg width="24" height="24" viewBox="0 0 24 24" className="text-green-500">
                                                                                 <g fill="currentColor" fillRule="evenodd">
                                                                                           <path fillRule="nonzero" d="M6 4.5h12A1.5 1.5 0 0 1 19.5 6v2.5h-15V6A1.5 1.5 0 0 1 6 4.5z" opacity=".1"></path>
@@ -24,7 +28,8 @@ export default function SideBar() {
                                         </Link>
                                         <Link to={"/completed"}>
                                                   <li className='cursor-pointer'>
-                                                            <div className=' flex px-4 py-1 rounded-sm hover:bg-[#363636] transition-all duration-100 '>
+
+                                                            <div className={`px-4  py-1 flex rounded-sm hover:bg-[#363636] ${path[1] === 'completed' ? "bg-[#363636]" : ""} transition-all duration-100 `}>
                                                                       <svg
                                                                                 width="24"
                                                                                 height="24"
@@ -42,6 +47,6 @@ export default function SideBar() {
                                                   </li>
                                         </Link>
                               </ul>
-                    </div>
+                    </div >
           )
 }
