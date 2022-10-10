@@ -23,6 +23,7 @@ export const otherStateSlice = createSlice({
     editForm: (state, action: PayloadAction<boolean>) => {
       return { ...state, showEditingForm: action.payload };
     },
+    
   },
 });
 

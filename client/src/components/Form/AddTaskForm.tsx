@@ -7,12 +7,7 @@ export default function AddTaskForm({ onSubmit, onChange, value }) {
           const dispatch = useDispatch()
           const inputRef = useRef<HTMLInputElement>(null)
           useEffect(() => {
-
                     inputRef.current?.focus()
-
-                    // return () => {
-                    //           console.log('imeunmount');
-                    // }
           },)
 
           return (

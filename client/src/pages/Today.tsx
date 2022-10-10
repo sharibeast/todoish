@@ -10,7 +10,6 @@ import AddTaskForm from '../components/Form/AddTaskForm'
 import Task from '../components/Task'
 
 export default function Today() {
-
           const todos = useSelector((state: Rootstate) => state.tasks.filter((todo) => todo.completed === false))
           const showForm = useSelector((state: Rootstate) => state.otherStates.showAddTaskForm)
           const newDispatch = useAppDispatch()
@@ -43,9 +42,18 @@ export default function Today() {
           }
 
           function addTask() {
-                    console.log('clicked')
                     dispatch(editForm(false))
                     dispatch(addTaskForm(true))
+          }
+          function handleEdit(id: number) {
+                    console.log('edit at ', id)
+                    dispatch(editForm(true))
+          }
+
+          function handleEditUpdated(e: FormEvent, id: number) {
+                    e.preventDefault()
+                    console.log('i want to submit this id ', id);
+
           }
           return (
 
@@ -59,15 +67,16 @@ export default function Today() {
                                         <div className=''>
                                                   <ul className=''>
                                                             {
-                                                                      todos.map((todo) => <Task
-                                                                                key={todo.id}
-                                                                                checked={todo.completed}
-                                                                                onChange={() => handleCheck(todo.id)
-                                                                                }
-                                                                                onDelete={() => handleDelete(todo.id)}
-                                                                                todo={todo.todo}
-                                                                      // onUpdate={()=>setTodo()}
-                                                                      />)
+                                                                      todos.map(
+                                                                                (todo) => <Task id={todo.id}
+                                                                                          key={todo.id}
+                                                                                          checked={todo.completed}
+                                                                                          onChange={() => handleCheck(todo.id)
+                                                                                          }
+                                                                                          onDelete={() => handleDelete(todo.id)}
+                                                                                          todo={todo.todo}
+                                                                                          onUpdate={() => handleEdit(todo.id)}
+                                                                                />)
                                                             }
                                                   </ul>
                                                   {
