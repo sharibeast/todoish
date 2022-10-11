@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import SideBar from './components/SideBar';
 import Completed from './pages/Completed';
@@ -16,6 +16,7 @@ function App() {
         <SideBar />
         <div className='flex-1  max-w-3xl mx-auto'>
           <Routes>
+            <Route path='/' element={<Navigate to={"/today"} replace />} />
             <Route path='/today' element={<Today />} />
             <Route path='/completed' element={<Completed />} />
           </Routes>

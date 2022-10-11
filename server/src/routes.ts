@@ -8,8 +8,7 @@ function routes(app: Express) {
     return res.sendStatus(200);
   });
 
-
-  app.post('/api/users',validate(createUserSchema),createUser)
+  app.post('/api/users', validate(createUserSchema), createUser);
 }
 
 export default routes;
