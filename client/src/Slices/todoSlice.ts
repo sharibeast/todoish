@@ -34,7 +34,6 @@ export const todoSlice = createSlice({
         completed: false,
         todo: action.payload,
       };
-      console.log(newTodo);
       state.push(newTodo);
     },
     updateTodo: (state, action: PayloadAction<number>) => {
@@ -45,12 +44,21 @@ export const todoSlice = createSlice({
         return { ...todo, completed: !todo.completed };
       });
     },
+    updateEditedTodo: (state, action: PayloadAction<{ id: number; todo: string }>) => {
+      return state.map((todo) => {
+        if (todo.id !== action.payload.id) {
+          return todo;
+        }
+        console.log(current(state));
+        return { ...todo, todo: action.payload.todo };
+      });
+    },
     deleteTodo: (state, action: PayloadAction<number>) => {
       return state.filter((todo) => todo.id !== action.payload);
     },
   },
 });
 
-export const { addTodo, updateTodo, deleteTodo } = todoSlice.actions;
+export const { addTodo, updateTodo, deleteTodo, updateEditedTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
